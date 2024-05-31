@@ -1,0 +1,204 @@
+
+<body>
+  <app-navigate></app-navigate>
+<br>
+  <form [formGroup]="myForm" class='myfor' (ngSubmit)="submitForm()">
+
+
+<div class="login-wrap1">
+  <div class="login-html">
+    <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Data</label>
+    <div class="login-form">
+<br>
+<tr>
+  <td style="padding-right: 20px;">
+  <label class="label" class="form-label" for="salariesid"> salaries : </label>
+  <select class="input" id="salariesid" class="form-input"  (change)="chosesalaries($event)" formControlName="salariesid" required>
+    
+    <option value="all">Toutes les salaries</option>
+    <option *ngFor="let salaries of Salariess" [value]="salaries.id">{{salaries.prenom }}</option>
+</select>
+</td>
+
+<td >
+  
+     <div >
+       <div >
+         <div >
+           <tr>
+            <div class="group">
+              <label  class="label"  for="missionid" >Mission:</label>
+              <input class="input" type="text" id="missionid" formControlName="missionid" [value]="selectedMissionsalaries?.codemission" readonly><br>
+           </div>
+            
+         </tr>
+       </div>
+     </div>
+   </div>
+ </td>
+
+
+ <td>
+  <label class="label" for="craid"> CRA : </label>
+  <select class="input" id="craid" class="form-input" formControlName="craid" (change)="chosedCra($event)" required>
+    <option value="all">Toutes les cras</option>
+    <option *ngFor="let CRA of cras" [value]="CRA.id">{{ CRA.mois }}</option>
+</select>
+</td>
+<br>
+<br>
+<tr>
+  <td>
+    
+     <tr>
+      <div class="group">
+        <label  class="label"  for="mois">mois:</label>
+        <input  class="input" type="text" formControlName="CRA" id="mois" (keyup)="submitForm()" [value]="selectedCRA?.mois"   required readonly>
+     </div>
+   </tr>
+   </td>
+<td>
+  
+   <tr>
+    <div class="group">
+      <label  class="label"  for="tjm">TJM:</label>
+      <input  class="input" type="text" formControlName="tjm" id="tjm" (keyup)="submitForm()" [value]="selectedMissionsalaries?.tjm"   required readonly>
+   </div>
+ </tr>
+ </td>
+ <td>
+  
+   <tr>
+    <div class="group">
+      <label  class="label"  for="nbjour">nbjour:</label>
+      <input  class="input" type="text" formControlName="nbjour" id="nbjour" (keyup)="submitForm()" [value]="selectedCRA?.nbjour"   required readonly>
+   </div>
+ </tr>
+   
+ </td>
+
+ <td>
+  <div class="group">
+     <label  class="label"  for="facture" >facture:</label>
+     <input  class="input" type="text" formControlName="facture" (keyup)="submitForm()"  required readonly>
+  </div>
+</td>
+
+</tr>
+<br>
+<tr>
+  <td>
+    
+     
+     <tr>
+      <div class="group">
+        <label  class="label"  for="Salairebrut">salaire brut:</label>
+        <input  class="input" type="text" formControlName="Salairebrut"  [value]="pdfssalaries?.salairebrut"   required readonly>
+     </div>
+   </tr>
+   </td>
+
+<td>
+  
+   <tr>
+    <div class="group">
+      <label  class="label"  for="netpaye">salaire net:</label>
+      <input  class="input" type="text" formControlName="netpaye"  [value]="pdfssalaries?.netpaye" (keyup)="submitForm()"  required readonly>
+   </div>
+ </tr>
+ </td>
+
+
+ <td>
+  <div class="group">
+     <label  class="label"  for="FraisRepas">Frais Repas:</label>
+     <input  class="input" type="text" formControlName="fraisrepas" (keyup)="submitForm()"  required>
+  </div>
+</td>
+
+
+
+
+ <td>
+  <div class="group">
+     <label  class="label"  for="fraiskilo">Frais Kilo:</label>
+     <input  class="input" type="text" formControlName="fraiskilo" (keyup)="submitForm()"  required>
+  </div>
+</td>
+</tr><br>
+
+
+
+
+
+<tr>
+  <td>
+    <div class="group">
+       <label  class="label"  for="autre">autre:</label>
+       <input  class="input" type="text" formControlName="autre" (keyup)="submitForm()"  required>
+    </div>
+  </td>
+
+  <td>
+    <div class="group">
+       <label  class="label"  for="totalPercu">totalPercu:</label>
+       <input  class="input" type="text" formControlName="totalPercu" (keyup)="submitForm()"  required readonly>
+    </div>
+  </td>
+
+<td>
+ 
+     
+           <tr>
+            <div class="group">
+              <label  class="label"  for="chpatroniales">charge patronal:</label>
+              <input  class="input" type="text" formControlName="chpatroniales"  [value]="pdfssalaries?.chpatroniales" (keyup)="submitForm()"  required readonly>
+           </div>
+         </tr>
+       
+ </td>
+ <td>
+  <div class="group">
+     <label  class="label"  for="chargesalarial">charge salarial:</label>
+     <input  class="input" type="text" formControlName="chargesalarial" (keyup)="submitForm()"  required>
+  </div>
+</td>
+
+
+</tr>
+<br>
+<td style="padding-left: 10px; padding-right: 1px;">
+  <label  class="label"  for="chargeannexe" >Charge Annexe:</label>
+  <div class="group">
+    <div class="gray-input2">
+      <div >
+        <div class="text-area">
+     <input  class="input" type="text" formControlName="chargeannexe" (keyup)="submitForm()"  required readonly>
+  </div>
+</div>
+</div>
+</div>
+</td>
+<td>
+  
+     
+           <tr>
+            <div class="group">
+              <label  class="label"  for="cout">cout:</label>
+              <input  class="input" type="text" formControlName="cout" (keyup)="submitForm()"  required readonly>
+           </div>
+          
+         </tr>
+       
+  </td>
+<br><br>
+                        <button (click)="save()" >
+                          Sauvgarder
+                        </button>
+  </div>
+</div>
+</div>
+
+</form>
+</body>
+
