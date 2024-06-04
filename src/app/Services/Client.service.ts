@@ -12,6 +12,8 @@ const baseurl = "http://localhost:7080/api/Client";
 
 export class ClientService {
 
+  token = localStorage.getItem('jwtToken');
+  headers = new HttpHeaders().set('Authorization', `Bearer `+this.token);
   private baseUrl: string = "http://localhost:7080/api/Client";
   private baseUrl2: string = "http://localhost:7080/api/Client/updateclient";
   private baseUrl3: string = "http://localhost:7080/api/Client/deleteclient";
@@ -20,23 +22,24 @@ export class ClientService {
   constructor(private http: HttpClient) { }
   getClientById(id: string): Observable<Client> {
     const url = `${this.baseUrl}/${id}`;
-    return this.http.get<Client>(url);
+    return this.http.get<Client>(url,{headers: this.headers});
   }
   getClients(): Observable<Client[]> {
-    return this.http.get<Client[]>(this.baseUrl).pipe(
+    console.log(this.headers)
+    return this.http.get<Client[]>(this.baseUrl,{headers: this.headers}).pipe(
       map(response => response)
     );
   }
 
   create(data: any): Observable<Client> {
-    return this.http.post<Client>("http://localhost:7080/api/Client/save", data).pipe(
+    return this.http.post<Client>("http://localhost:7080/api/Client/save", data,{headers: this.headers}).pipe(
       map(response => response)
     );
   }
 
 
   update(id: string,data: any): Observable<Client> {
-    return this.http.put<Client>(`${this.baseUrl2}/${id}`, data).pipe(
+    return this.http.put<Client>(`${this.baseUrl2}/${id}`, data,{headers: this.headers}).pipe(
       map(response => response)
     );
   }
@@ -44,37 +47,37 @@ export class ClientService {
 
 
   delete(id: String): Observable<Client> {
-    return this.http.delete<Client>(`${this.baseUrl3}/${id}`).pipe(
+    return this.http.delete<Client>(`${this.baseUrl3}/${id}`,{headers: this.headers}).pipe(
       map(response => response)
     );
   }
 
   deleteAll(): Observable<Client> {
-    return this.http.delete<Client>(this.baseUrl).pipe(
+    return this.http.delete<Client>(this.baseUrl,{headers: this.headers}).pipe(
       map(response => response)
     );
   }
 
   getClient(id: number): Observable<Client> {
-    return this.http.get<Client>(`${this.baseUrl}/${id}`).pipe(
+    return this.http.get<Client>(`${this.baseUrl}/${id}`,{headers: this.headers}).pipe(
       map(response => response)
     )
   }
 
 
   getAllClient(): Observable<Client[]> {
-    return this.http.get<Client[]>(`${this.baseUrl}`);
+    return this.http.get<Client[]>(`${this.baseUrl}`,{headers: this.headers});
   }
 
   getAllClients(): Observable<Client[]> {
-    return this.http.get<Client[]>(`${this.baseUrl}`);
+    return this.http.get<Client[]>(`${this.baseUrl}`,{headers: this.headers});
   }
 
 
 
 
   searchClient(searchTerm: string): Observable<Client[]> {
-    return this.http.get<Client[]>(`${this.baseUrl}`).pipe(
+    return this.http.get<Client[]>(`${this.baseUrl}`,{headers: this.headers}).pipe(
       map(client => {
         if (!isNaN(+searchTerm)) { // Vérifie si searchTerm est un nombre
           return client.filter(c => c.libelle === searchTerm);

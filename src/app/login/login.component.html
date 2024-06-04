@@ -18,13 +18,13 @@
         </div>
         <div class="container">
           <label for="uname"><b>Username</b></label>
-          <input type="text" name="username" [(ngModel)]="username" id="email" placeholder="username">
+          <input type="text" name="username" [(ngModel)]="request.name" id="email" placeholder="username">
         
           <label for="psw"><b>Password</b></label>
-           <input type="password" name="password" [(ngModel)]="password" id="password" placeholder="password">
+           <input type="password" name="password" [(ngModel)]="request.password" id="password" placeholder="password">
         
         
-        <button type="submit" id="go" (click)="doLogin()" >Login</button>
+        <button type="submit" id="go" (click)="submitForm()" >Login</button>
         
           <label>
             <input type="checkbox" checked="checked" name="remember"> Remember me
